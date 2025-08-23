@@ -17,6 +17,20 @@
     #endif  // ROBOT_TYPE_Go1
 #endif  // COMPILE_WITH_REAL_ROBOT
 
+// enum class UserCommand {
+//   // EXIT,
+//   NONE,
+//   START, // trotting
+//   L2_A,  // fixedStand
+//   L2_B,  // passive
+//   L2_X,  // freeStand
+// #ifdef COMPILE_WITH_MOVE_BASE
+//   L2_Y, // move_base
+// #endif  // COMPILE_WITH_MOVE_BASE
+//   L1_X, // balanceTest
+//   L1_A, // swingTest
+//   L1_Y  // stepTest
+// };
 struct UserValue{
     float lx;
     float ly;
