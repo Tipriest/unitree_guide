@@ -1,7 +1,7 @@
 /**********************************************************************
  Copyright (c) 2020-2023, Unitree Robotics.Co.Ltd. All rights reserved.
 ***********************************************************************/
-#ifdef COMPILE_WITH_ROS
+
 
 #include "interface/IOROS.h"
 #include "interface/KeyBoard.h"
@@ -218,4 +218,3 @@ void IOROS::RLcalfCallback(const unitree_legged_msgs::MotorState& msg)
     _lowState.motorState[11].tauEst = msg.tauEst;
 }
 
-#endif  // COMPILE_WITH_ROS
