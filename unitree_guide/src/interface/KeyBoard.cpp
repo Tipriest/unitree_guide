@@ -13,12 +13,12 @@ KeyBoard::KeyBoard(){
     _newSettings.c_lflag &= (~ICANON & ~ECHO);
     tcsetattr( fileno( stdin ), TCSANOW, &_newSettings );
 
-    pthread_create(&_tid, NULL, runKeyBoard, (void*)this);
+    pthread_create(&_tid, nullptr, runKeyBoard, (void*)this);
 }
 
 KeyBoard::~KeyBoard(){
     pthread_cancel(_tid);
-    pthread_join(_tid, NULL);
+    pthread_join(_tid, nullptr);
     tcsetattr( fileno( stdin ), TCSANOW, &_oldSettings );
 }
 
@@ -83,8 +83,8 @@ void KeyBoard::changeValue(){
 }
 
 void* KeyBoard::runKeyBoard(void *arg){
-    ((KeyBoard*)arg)->run(NULL);
-    return NULL;
+    ((KeyBoard*)arg)->run(nullptr);
+    return nullptr;
 }
 
 void* KeyBoard::run(void *arg){
@@ -92,7 +92,7 @@ void* KeyBoard::run(void *arg){
         FD_ZERO(&set);
         FD_SET( fileno( stdin ), &set );
 
-        res = select( fileno( stdin )+1, &set, NULL, NULL, NULL);
+        res = select( fileno( stdin )+1, &set, nullptr, nullptr, nullptr);
 
         if(res > 0){
             ret = read( fileno( stdin ), &_c, 1 );
@@ -103,5 +103,5 @@ void* KeyBoard::run(void *arg){
         }
         usleep(1000);
     }
-    return NULL;
+    return nullptr;
 }
