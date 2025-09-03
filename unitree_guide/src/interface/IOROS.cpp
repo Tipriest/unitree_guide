@@ -3,6 +3,7 @@
 ***********************************************************************/
 
 #include "interface/IOROS.h"
+#include "interface/JoyStick.h"
 #include "interface/KeyBoard.h"
 #include <csignal>
 #include <iostream>
@@ -28,7 +29,8 @@ IOROS::IOROS() : IOInterface() {
 
   signal(SIGINT, RosShutDown);
 
-  cmdPanel = new KeyBoard();
+  // cmdPanel = new KeyBoard();
+  cmdPanel = new JoyStick(_nm);
 }
 
 IOROS::~IOROS() {

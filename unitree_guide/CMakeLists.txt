@@ -8,6 +8,7 @@ set(CATKIN_MAKE ON)        # Use CATKIN_MAKE or not, ON or OFF
 set(SIMULATION ON)         # Use Gazebo or not, ON or OFF
 set(REAL_ROBOT OFF)          # Link real robot or not, ON or OFF
 set(DEBUG OFF)              # Use debug functions or not, ON or OFF
+# set(DEBUG ON)              # Use debug functions or not, ON or OFF
 set(MOVE_BASE OFF)               # Need move_base or not, ON or OFF 
 
 if(NOT DEFINED ROBOT_TYPE)
@@ -71,7 +72,7 @@ if(CATKIN_MAKE)
     )
     catkin_package(
         CATKIN_DEPENDS 
-        unitree_legged_msgs 
+        unitree_legged_msgs
     )
 endif()
 
