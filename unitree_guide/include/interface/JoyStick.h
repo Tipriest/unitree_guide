@@ -9,6 +9,7 @@
 #include <sensor_msgs/Joy.h>
 #include <sensor_msgs/JoyFeedback.h>
 #include <sensor_msgs/JoyFeedbackArray.h>
+#include <std_msgs/Float32MultiArray.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/time.h>
@@ -34,6 +35,7 @@ private:
 
   ros::NodeHandle nh;
   ros::Subscriber joystick_cmd_sub;
+  ros::Publisher joystick_cmd_actual_pub;
+  std_msgs::Float32MultiArray cmd_actual_pub_msg;
   pthread_t _tid;
 };
-
