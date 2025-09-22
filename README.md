@@ -31,10 +31,7 @@ To open the gazebo simulator, run:
 roslaunch unitree_guide gazeboSim.launch 
 ```
 
-For starting the controller, open an another terminal and switch to the same directory,  then run the following command:
-```
-./devel/lib/unitree_guide/junior_ctrl
-```
+
 
 ## usage
 After starting the controller,  the robot will lie on the ground of the simulator, then press the '2' key on the keyboard to switch the robot's finite state machine (FSM) from **Passive**(initial state) to **FixedStand**,  then press the '4' key to switch the FSM from **FixedStand** to **Trotting**, now you can press the 'w' 'a' 's' 'd' key to control the translation of the robot, and press the 'j' 'l' key to control the rotation of the robot. Press the Spacebar, the robot will stop and stand on the ground

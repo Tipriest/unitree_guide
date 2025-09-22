@@ -71,4 +71,9 @@
     <node pkg="rviz" type="rviz" name="rviz" 
         args="--display-config $(find unitree_guide)/rviz/config.rviz">
     </node>
+    
+    <!-- 遥控器控制程序 -->
+    <node pkg= "unitree_guide" type = "junior_ctrl" name = "junior_ctrl" output = "screen">
+    </node>
+
 </launch>

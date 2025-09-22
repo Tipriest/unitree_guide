@@ -68,4 +68,7 @@
         <param name="odom_topic" value="/ground_truth" />
     </node>
 
+    <!-- 遥控器控制程序 -->
+    <node pkg= "unitree_guide" type = "junior_ctrl" name = "junior_ctrl" output = "screen"/>
+
 </launch>
