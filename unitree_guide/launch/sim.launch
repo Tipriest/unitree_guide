@@ -1,0 +1,48 @@
+<launch>
+    <arg name="wname" default="willowgarage"/>
+    <arg name="rname" default="go1l2"/>
+    <arg name="robot_path" value="(find $(arg rname)_description)"/>
+    <arg name="dollar" value="$"/>
+    <!-- Debug mode will hung up the robot, use "true" or "false" to switch it. -->
+    <arg name="user_debug" default="false"/>
+    <arg name="rviz" default="false"/>
+    <arg name="rosbag" default="true"/>
+    <arg name="joystick_type" value = "ps5" doc = "xbox ps5 beitong_bd4a"/>
+    <arg name="slam_method" value = "fast_lio" doc = "fast_lio"/>
+
+    
+    <!-- 加载gazebo环境 -->
+    <include file="$(find unitree_guide)/launch/gazeboLoad.launch">
+        <arg name="wname" value="$(arg wname)"/>
+    </include>
+
+    <!-- 在gazebo中加载机器人模型(加载模型，urdf生成，加载位置) -->
+    <include file="$(find unitree_guide)/launch/robotLoad.launch">
+        <arg name="rname" value="$(arg rname)"/>
+        <arg name="robot_path" value="$(arg robot_path)"/>
+        <arg name="dollar" value="$(arg dollar)"/>
+    </include>
+
+    <!-- 加载机器人控制参数，unitree ros controller插件, 手柄节点 -->
+    <include file="$(find unitree_guide)/launch/robotControl.launch">
+        <arg name="rname" value="$(arg rname)"/>
+        <arg name="joystick_type" value="$(arg joystick_type)"/>
+        <arg name="dollar" value="$(arg dollar)"/>
+        <arg name="robot_path" value="(arg robot_path)"/>
+    </include>
+
+    <!-- tf坐标转换，rviz显示，rosbag录制 -->
+    <include file="$(find unitree_guide)/launch/chore.launch">
+        <arg name="rviz" value="$(arg rviz)"/>
+        <arg name="rosbag" value="$(arg rosbag)"/>
+        <arg name="slam_method" value="$(arg slam_method)"/>
+    </include>
+    <!-- <node pkg="unitree_gazebo" type="servo" name="servo" required="true" output="screen"/> -->
+    
+    <!-- slam方法 -->
+    <include file="$(find unitree_guide)/launch/slam.launch">
+        <arg name="slam_method" value="$(arg slam_method)"/>
+    </include>
+
+
+</launch>

@@ -1,0 +1,25 @@
+<launch>
+    <arg name="rname" default="go1l2"/>
+    <arg name="rviz" default="false"/>
+    <arg name="rosbag" default="true"/>
+    <arg name="slam_method" default="fastlio"/>
+    
+    <!-- 从gazebo插件输出的绝对位置到tf树的转换 -->
+    <node pkg="gt_tf_pub" type="gt_tf_pub" name="gt_tf_pub" output="screen">
+        <param name="odom_topic" value="/ground_truth" />
+    </node>
+
+    <!-- 是否开启rviz -->
+    <group if="$(arg rviz)">
+        <node pkg="rviz" type="rviz" name="rviz" 
+            args="--display-config $(find unitree_guide)/rviz/config.rviz">
+        </node>
+    </group>
+
+    <!-- 是否使用rosbag进行record -->
+    <group if="$(arg rosbag)">
+        <include file="$(find unitree_guide)/launch/rosbagRecord.launch">
+            <arg name="slam_prefix" value="$(arg slam_method)"/>
+        </include>
+    </group>
+</launch>

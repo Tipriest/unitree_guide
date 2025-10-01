@@ -1,0 +1,8 @@
+<launch>
+    <!-- 输出目录（默认：/home/your_user/rosbags）-->
+    <arg name="base_dir" default="/home/tipriest/rosbags/legged_localization_benchmark"/>
+    <!-- 文件前缀 -->
+    <arg name="slam_prefix" default="unnamed_slam"/>
+    <node pkg="unitree_guide" type="record_all.sh" name="rosbag_record_all" 
+            output="screen" respawn="true" args="$(arg base_dir) $(arg slam_prefix)"/>
+</launch>

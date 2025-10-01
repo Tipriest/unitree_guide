@@ -1,9 +1,12 @@
 <launch>
+    <!-- simulator and robot model related -->
     <arg name="wname" default="tugbot_depot"/>
     <arg name="rname" default="go1l2"/>
     <arg name="robot_path" value="(find $(arg rname)_description)"/>
     <arg name="dollar" value="$"/>
 
+
+    <!-- gazebo related -->
     <arg name="paused" default="true"/>
     <arg name="use_sim_time" default="true"/>
     <arg name="gui" default="true"/>

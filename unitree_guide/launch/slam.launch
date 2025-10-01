@@ -1,0 +1,7 @@
+<launch>
+    <arg name="slam_method" default="fast_lio"/>
+    <!-- slam建图程序 -->
+    <group if="$(eval arg('slam_method') == 'fast_lio')">
+        <include file="$(find fast_lio)/launch/mapping_velodyne.launch"/>
+    </group>
+</launch>
