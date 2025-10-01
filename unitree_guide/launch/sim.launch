@@ -40,9 +40,9 @@
     <!-- <node pkg="unitree_gazebo" type="servo" name="servo" required="true" output="screen"/> -->
     
     <!-- slam方法 -->
-    <include file="$(find unitree_guide)/launch/slam.launch">
+    <!-- <include file="$(find unitree_guide)/launch/slam.launch">
         <arg name="slam_method" value="$(arg slam_method)"/>
-    </include>
+    </include> -->
 
 
 </launch>
