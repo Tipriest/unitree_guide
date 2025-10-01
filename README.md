@@ -18,7 +18,7 @@ Put these three packages in the src folder of a ROS workspace.
 ## build
 Open a terminal and switch the directory to the ros workspace containing unitree_guide,  then run the following command to build the project:
 ```
-catkin_make
+catkin build
 ```
 If you have any error in this step, you can raise an issue to us.
 ## run
