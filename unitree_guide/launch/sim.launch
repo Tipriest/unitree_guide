@@ -8,7 +8,7 @@
     <arg name="rviz" default="false"/>
     <arg name="rosbag" default="true"/>
     <arg name="joystick_type" value = "ps5" doc = "xbox ps5 beitong_bd4a"/>
-    <arg name="slam_method" value = "fast_lio" doc = "fast_lio"/>
+    <arg name="slam_method" value = "point_lio" doc = "fast_lio point_lio"/>
 
     
     <!-- 加载gazebo环境 -->
