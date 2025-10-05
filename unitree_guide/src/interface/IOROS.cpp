@@ -47,7 +47,7 @@ void IOROS::sendRecv(const LowlevelCmd *cmd, LowlevelState *state) {
 }
 
 void IOROS::sendCmd(const LowlevelCmd *lowCmd) {
-  for (int i(0); i < 12; ++i) {
+  for (int i = 0; i < 12; ++i) {
     _lowCmd.motorCmd[i].mode = lowCmd->motorCmd[i].mode;
     _lowCmd.motorCmd[i].q = lowCmd->motorCmd[i].q;
     _lowCmd.motorCmd[i].dq = lowCmd->motorCmd[i].dq;
@@ -62,13 +62,13 @@ void IOROS::sendCmd(const LowlevelCmd *lowCmd) {
 }
 
 void IOROS::recvState(LowlevelState *state) {
-  for (int i(0); i < 12; ++i) {
+  for (int i = 0; i < 12; ++i) {
     state->motorState[i].q = _lowState.motorState[i].q;
     state->motorState[i].dq = _lowState.motorState[i].dq;
     state->motorState[i].ddq = _lowState.motorState[i].ddq;
     state->motorState[i].tauEst = _lowState.motorState[i].tauEst;
   }
-  for (int i(0); i < 3; ++i) {
+  for (int i = 0; i < 3; ++i) {
     state->imu.quaternion[i] = _lowState.imu.quaternion[i];
     state->imu.accelerometer[i] = _lowState.imu.accelerometer[i];
     state->imu.gyroscope[i] = _lowState.imu.gyroscope[i];

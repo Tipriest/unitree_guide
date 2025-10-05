@@ -29,7 +29,7 @@ struct LowlevelCmd {
   MotorCmd motorCmd[12];
 
   void setQ(Vec12 q) {
-    for (int i(0); i < 12; ++i) {
+    for (int i = 0; i < 12; ++i) {
       motorCmd[i].q = q(i);
     }
   }
@@ -39,7 +39,7 @@ struct LowlevelCmd {
     motorCmd[legID * 3 + 2].q = qi(2);
   }
   void setQd(Vec12 qd) {
-    for (int i(0); i < 12; ++i) {
+    for (int i = 0; i < 12; ++i) {
       motorCmd[i].dq = qd(i);
     }
   }
@@ -49,7 +49,7 @@ struct LowlevelCmd {
     motorCmd[legID * 3 + 2].dq = qdi(2);
   }
   void setTau(Vec12 tau, Vec2 torqueLimit = Vec2(-50, 50)) {
-    for (int i(0); i < 12; ++i) {
+    for (int i = 0; i < 12; ++i) {
       if (std::isnan(tau(i))) {
         printf("[ERROR] The setTau function meets Nan\n");
       }
@@ -62,7 +62,7 @@ struct LowlevelCmd {
     motorCmd[legID * 3 + 2].dq = 0;
   }
   void setZeroDq() {
-    for (int i(0); i < 4; ++i) {
+    for (int i = 0; i < 4; ++i) {
       setZeroDq(i);
     }
   }
@@ -105,7 +105,7 @@ struct LowlevelCmd {
     motorCmd[legID * 3 + 2].Kd = 0;
   }
   void setZeroGain() {
-    for (int i(0); i < 4; ++i) {
+    for (int i = 0; i < 4; ++i) {
       setZeroGain(i);
     }
   }
@@ -121,7 +121,7 @@ struct LowlevelCmd {
     motorCmd[legID * 3 + 2].Kd = 0.8;
   }
   void setStableGain() {
-    for (int i(0); i < 4; ++i) {
+    for (int i = 0; i < 4; ++i) {
       setStableGain(i);
     }
   }
