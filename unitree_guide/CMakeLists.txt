@@ -52,7 +52,7 @@ endif()
 
 if(CATKIN_MAKE)
     if(SIMULATION)
-        add_definitions(-DCOMPILE_WITH_SIMULATION)
+        add_definitions(-DCOMPILE_WITH_GAZEBO)
         find_package(catkin REQUIRED COMPONENTS
             controller_manager
             joint_state_controller

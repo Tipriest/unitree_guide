@@ -56,10 +56,10 @@ int main(int argc, char **argv) {
   IOInterface *ioInter;
   CtrlPlatform ctrlPlat;
 
-#ifdef COMPILE_WITH_SIMULATION
+#ifdef COMPILE_WITH_GAZEBO
   ioInter = new IOROS();
   ctrlPlat = CtrlPlatform::GAZEBO;
-#endif // COMPILE_WITH_SIMULATION
+#endif // COMPILE_WITH_GAZEBO
 
 #ifdef COMPILE_WITH_REAL_ROBOT
   ioInter = new IOSDK();

@@ -133,11 +133,11 @@ A1Robot::A1Robot() {
   _Ib = Vec3(0.132, 0.3475, 0.3775).asDiagonal();
 #endif // COMPILE_WITH_REAL_ROBOT
 
-#ifdef COMPILE_WITH_SIMULATION
+#ifdef COMPILE_WITH_GAZEBO
   _mass = 13.4;
   _pcb << 0.0, 0.0, 0.0;
   _Ib = Vec3(0.132, 0.3475, 0.3775).asDiagonal();
-#endif // COMPILE_WITH_SIMULATION
+#endif // COMPILE_WITH_GAZEBO
 }
 
 Go1Robot::Go1Robot() {
@@ -159,9 +159,9 @@ Go1Robot::Go1Robot() {
   _Ib = Vec3(0.0792, 0.2085, 0.2265).asDiagonal();
 #endif // COMPILE_WITH_REAL_ROBOT
 
-#ifdef COMPILE_WITH_SIMULATION
+#ifdef COMPILE_WITH_GAZEBO
   _mass = 12.0;
   _pcb << 0.0, 0.0, 0.0;
   _Ib = Vec3(0.0792, 0.2085, 0.2265).asDiagonal();
-#endif // COMPILE_WITH_SIMULATION
+#endif // COMPILE_WITH_GAZEBO
 }
