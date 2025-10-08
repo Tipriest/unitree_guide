@@ -18,7 +18,7 @@
 
     <!-- 是否使用rosbag进行record -->
     <group if="$(arg rosbag)">
-        <include file="$(find unitree_guide)/launch/rosbagRecord.launch">
+        <include file="$(find unitree_guide)/launch/low_level/rosbagRecord.launch">
             <arg name="slam_prefix" value="$(arg slam_method)"/>
         </include>
     </group>
