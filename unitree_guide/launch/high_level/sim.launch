@@ -29,7 +29,6 @@
     <arg name="robot_path" value="$(arg robot_path)"/>
     <arg name="dollar" value="$(arg dollar)"/>
     <arg name="user_debug" value="$(arg user_debug)"/>
-
 </include>
 
     <!-- tf坐标转换，rviz显示，rosbag录制 -->
