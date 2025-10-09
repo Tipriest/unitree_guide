@@ -31,7 +31,7 @@
         <remap from="/joint_states" to="/$(arg rname)_gazebo/joint_states"/>
     </node>
 
-    <!-- 机器人接收遥控器指令的程序 -->
+    <!-- 控制程序，状态机与状态切换 -->
     <node pkg= "unitree_guide" type = "junior_ctrl" name = "junior_ctrl" output = "screen">
     </node>
 </launch>

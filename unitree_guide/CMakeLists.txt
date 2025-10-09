@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.14)
 project(unitree_guide)
+set(CMAKE_BUILD_TYPE "Release")
 
 set(ROBOT_TYPE Go1)         # The type of robot, support Go1 and A1 currently
 set(PLATFORM amd64)         # The platform to compile, support amd64 and arm64
