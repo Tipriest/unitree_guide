@@ -26,9 +26,19 @@ void JoyStick::subJoystickMsgsCallback(const sensor_msgs::Joy::ConstPtr &msg) {
   // Handle joystick message here
   // Example: you can parse msg->axes and msg->buttons
   if (1 == msg->buttons[0]) {
-    userCmd = UserCommand::L2_A;
+    userCmd = UserCommand::L2_A; // fixedstand
   } else if (1 == msg->buttons[1]) {
-    userCmd = UserCommand::START;
+    userCmd = UserCommand::START; // trotting
+  }
+#ifdef COMPILE_WITH_MOVE_BASE
+  else if (1 == msg->buttons[2]) {
+    userCmd = UserCommand::L2_Y; // move_base
+  }
+#endif
+  else if (1 == msg->buttons[3]) {
+    userCmd = UserCommand::L2_X; // freestand
+  } else if (1 == msg->buttons[7]) {
+    userCmd = UserCommand::L2_B; // passive
   }
   userValue.lx = clamp(msg->axes[0] * 1.0 / 32767, -1.0, 1.0);
   userValue.ly = clamp(msg->axes[1] * 1.0 / 32767, -1.0, 1.0);

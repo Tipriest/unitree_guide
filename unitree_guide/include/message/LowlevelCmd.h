@@ -8,7 +8,7 @@
 #include "common/mathTypes.h"
 
 struct MotorCmd {
-  unsigned int mode;
+  unsigned int mode; //设置电机模式
   float q;   //期望角度位置
   float dq;  //期望角度速度
   float tau; //前馈力矩

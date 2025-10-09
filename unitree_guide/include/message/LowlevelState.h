@@ -11,7 +11,7 @@
 #include <iostream>
 
 struct MotorState {
-  unsigned int mode;
+  unsigned int mode; //实际电机模式
   float q;
   float dq;
   float ddq;
