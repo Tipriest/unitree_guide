@@ -225,8 +225,8 @@ void Estimator::run() {
     _currentTime = ros::Time::now();
     /* tf */
     _odomTF.header.stamp = _currentTime;
-    _odomTF.header.frame_id = "odom";
-    _odomTF.child_frame_id = "base";
+    _odomTF.header.frame_id = "legged_estimator_world";
+    _odomTF.child_frame_id = "base2";
 
     _odomTF.transform.translation.x = _xhat(0);
     _odomTF.transform.translation.y = _xhat(1);
@@ -240,7 +240,7 @@ void Estimator::run() {
 
     /* odometry */
     _odomMsg.header.stamp = _currentTime;
-    _odomMsg.header.frame_id = "odom";
+    _odomMsg.header.frame_id = "legged_estimator_world";
 
     _odomMsg.pose.pose.position.x = _xhat(0);
     _odomMsg.pose.pose.position.y = _xhat(1);
@@ -252,7 +252,7 @@ void Estimator::run() {
     _odomMsg.pose.pose.orientation.z = _lowState->imu.quaternion[3];
     _odomMsg.pose.covariance = _odom_pose_covariance;
 
-    _odomMsg.child_frame_id = "base";
+    _odomMsg.child_frame_id = "base2";
     _velBody = _rotMatB2G.transpose() * _xhat.segment(3, 3);
     _wBody = _lowState->imu.getGyro();
     _odomMsg.twist.twist.linear.x = _velBody(0);

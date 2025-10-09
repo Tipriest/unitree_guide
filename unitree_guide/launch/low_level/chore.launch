@@ -6,7 +6,7 @@
     
     <!-- 从gazebo插件输出的绝对位置到tf树的转换 -->
     <node pkg="gt_tf_pub" type="gt_tf_pub" name="gt_tf_pub" output="screen">
-        <param name="odom_topic" value="/ground_truth" />
+        <param name="odom_topic" value="/gazebo_odom" />
     </node>
 
     <!-- 是否开启rviz -->
@@ -23,6 +23,11 @@
         </include>
     </group>
 
-    <!-- 将输出的Odometry转换为路径 -->
-    <include file="$(find odom_to_path)/launch/odom_to_path.launch"/>
+    <!-- 将输出的tf转换为路径 -->
+    <include file="$(find tf_to_path)/launch/tf_to_path.launch"/>
+    
+    <!-- 静态tf发布节点 -->
+    <node pkg="tf2_ros" type="static_transform_publisher" name="static_tf_publisher" 
+          args="0 0 0 0 0 0 world legged_estimator_world"/>
+
 </launch>

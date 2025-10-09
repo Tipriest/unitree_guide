@@ -217,59 +217,6 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        camera_chin:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        camera_face:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        camera_laserscan_link_left:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera_laserscan_link_right:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera_left:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        camera_optical_chin:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera_optical_face:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera_optical_left:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera_optical_rearDown:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera_optical_right:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera_rearDown:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        camera_right:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
         imu_link:
           Alpha: 1
           Show Axes: false
@@ -441,6 +388,54 @@ Visualization Manager:
       Use Fixed Frame: true
       Use rainbow: true
       Value: true
+    - Alpha: 1
+      Buffer Length: 1
+      Class: rviz/Path
+      Color: 0; 255; 0
+      Enabled: true
+      Head Diameter: 0.30000001192092896
+      Head Length: 0.20000000298023224
+      Length: 0.30000001192092896
+      Line Style: Lines
+      Line Width: 0.029999999329447746
+      Name: gazebo_gt_path
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Pose Color: 255; 85; 255
+      Pose Style: None
+      Queue Size: 10
+      Radius: 0.029999999329447746
+      Shaft Diameter: 0.10000000149011612
+      Shaft Length: 0.10000000149011612
+      Topic: /tf_to_path1/gazebo_gt_path
+      Unreliable: false
+      Value: true
+    - Alpha: 1
+      Buffer Length: 1
+      Class: rviz/Path
+      Color: 255; 255; 0
+      Enabled: true
+      Head Diameter: 0.30000001192092896
+      Head Length: 0.20000000298023224
+      Length: 0.30000001192092896
+      Line Style: Lines
+      Line Width: 0.029999999329447746
+      Name: legged_est_path
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Pose Color: 255; 85; 255
+      Pose Style: None
+      Queue Size: 10
+      Radius: 0.029999999329447746
+      Shaft Diameter: 0.10000000149011612
+      Shaft Length: 0.10000000149011612
+      Topic: /tf_to_path2/legged_est_path
+      Unreliable: false
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -469,7 +464,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 11.722067832946777
+      Distance: 24.177940368652344
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -477,17 +472,17 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: -0.07850414514541626
-        Y: 0.016148418188095093
-        Z: -0.0055736638605594635
+        X: -3.8445286750793457
+        Y: -1.64340341091156
+        Z: -1.3948888778686523
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.6397966146469116
+      Pitch: 1.514796495437622
       Target Frame: <Fixed Frame>
-      Yaw: 2.971771240234375
+      Yaw: 3.08676815032959
     Saved: ~
 Window Geometry:
   Displays:
