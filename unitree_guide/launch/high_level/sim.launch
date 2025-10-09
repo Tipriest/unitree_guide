@@ -23,13 +23,13 @@
         <arg name="dollar" value="$(arg dollar)"/>
     </include>
 
-<!-- 加载机器人控制参数，unitree ros controller插件 -->
-<include file="$(find unitree_guide)/launch/low_level/robotControl.launch">
-    <arg name="rname" value="$(arg rname)"/>
-    <arg name="robot_path" value="$(arg robot_path)"/>
-    <arg name="dollar" value="$(arg dollar)"/>
-    <arg name="user_debug" value="$(arg user_debug)"/>
-</include>
+    <!-- 加载机器人控制参数，unitree ros controller插件 -->
+    <include file="$(find unitree_guide)/launch/low_level/robotControl.launch">
+        <arg name="rname" value="$(arg rname)"/>
+        <arg name="robot_path" value="$(arg robot_path)"/>
+        <arg name="dollar" value="$(arg dollar)"/>
+        <arg name="user_debug" value="$(arg user_debug)"/>
+    </include>
 
     <!-- tf坐标转换，rviz显示，rosbag录制 -->
     <include file="$(find unitree_guide)/launch/low_level/chore.launch">
@@ -38,7 +38,4 @@
         <arg name="slam_method" value="$(arg slam_method)"/>
     </include>
     <!-- <node pkg="unitree_gazebo" type="servo" name="servo" required="true" output="screen"/> -->
-
-
-
 </launch>

@@ -44,7 +44,7 @@ void FSM::run() {
     ros::Time current_time = ros::Time::now();
 
     // 打印为秒和纳秒
-    ROS_INFO("Current Quadruped State is:  %s",
+    ROS_INFO("Current State is:  %s",
              _currentState->_stateNameString.c_str());
   }
   if (_mode == FSMMode::NORMAL) {
