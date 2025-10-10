@@ -1,0 +1,12 @@
+<launch>
+    <!-- 静态tf发布节点 -->
+    <node pkg="tf2_ros" type="static_transform_publisher" name="static_tf_publisher1" 
+          args="0 0 0 0 0 0 world legged_estimator_world"/>
+
+    <!-- 静态tf发布节点 -->
+    <node pkg="tf2_ros" type="static_transform_publisher" name="static_tf_publisher2" 
+          args="0 0 0 0 0 0 world slam_estimator_world"/>
+
+    <!-- 将输出的tf转换为路径 -->
+    <include file="$(find tf_to_path)/launch/tf_to_path.launch"/>
+</launch>

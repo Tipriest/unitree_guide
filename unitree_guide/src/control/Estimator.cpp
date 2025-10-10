@@ -236,7 +236,15 @@ void Estimator::run() {
     _odomTF.transform.rotation.y = _lowState->imu.quaternion[2];
     _odomTF.transform.rotation.z = _lowState->imu.quaternion[3];
 
-    _odomBroadcaster.sendTransform(_odomTF);
+    // 说明还没初始化完成
+    if (pow(_odomTF.transform.rotation.w, 2) +
+            pow(_odomTF.transform.rotation.w, 2) +
+            pow(_odomTF.transform.rotation.w, 2) +
+            pow(_odomTF.transform.rotation.w, 2) >
+        1e-5) {
+      _odomBroadcaster.sendTransform(_odomTF);
+    }
+    
 
     /* odometry */
     _odomMsg.header.stamp = _currentTime;
