@@ -7,7 +7,7 @@
     <!-- Debug mode will hung up the robot, use "true" or "false" to switch it. -->
     <arg name="user_debug" default="false"/>
     <arg name="rviz" default="true"/>
-    <arg name="rosbag" default="true"/>
+    <arg name="rosbag" default="false"/>
     <arg name="slam_method" value = "point_lio" doc = "fast_lio point_lio"/>
 
     
