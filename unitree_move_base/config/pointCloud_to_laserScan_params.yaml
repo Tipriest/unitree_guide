@@ -7,7 +7,7 @@ angle_max: 0.087
 angle_increment: 0.0175
 scan_time: 0.3333
 range_min: 0.1
-range_max: 1.5
+range_max: 10.0
 use_inf: true
 
 # Concurrency level, affects number of pointclouds queued for processing and number of threads used
