@@ -1,13 +1,27 @@
-obstacle_range: 1.0         ##
-raytrace_range: 1.5         ##
-footprint: [[0.3, 0.15], [0.3, -0.15], [-0.35, -0.15], [-0.35, 0.15]]
+# move_base的全局和局部代价地图的参数配置文件
+
+obstacle_range: 1.0         ## 传感器探测障碍物的距离，该距离内探测到的障碍物都会被加入到代价地图中
+raytrace_range: 1.5         ## 传感器探测无障碍物的距离，如果该距离内没有探测到障碍物，会在代价地图中清空这一范围
+footprint: [[0.3, 0.15], [0.3, -0.15], [-0.35, -0.15], [-0.35, 0.15]]  ## 机器人碰撞的长方形包围盒
 # robot_radius: 0.3
-inflation_radius: 0.03
-max_obstacle_height: 1.0
-min_obstacle_height: 0.0
+inflation_radius: 0.03  ## 机器人碰撞体积与障碍物之间的安全距离
+max_obstacle_height: 1.0   ## 障碍物最大高度
+min_obstacle_height: 0.0   ## 障碍物最小高度
+
+
+# 
 # observation_sources: scan
 # scan: {data_type: LaserScan, topic: /merged_laserscan, marking: true, clearing: true, expected_update_rate: 3.3}
-observation_sources: faceLaserScan leftLaserScan rightLaserScan
-faceLaserScan: {data_type: LaserScan, topic: /faceLaserScan, marking: true, clearing: true, expected_update_rate: 3.3}
-leftLaserScan: {data_type: LaserScan, topic: /leftLaserScan, marking: true, clearing: true, expected_update_rate: 3.3}
-rightLaserScan: {data_type: LaserScan, topic: /rightLaserScan, marking: true, clearing: true, expected_update_rate: 3.3}
+
+# 传感器列表，每一项在下面展开说明
+# data_type: move_base可以接受的点云类型有两种格式: LaserScan是2维的Lidar, PointCloud是三维的Lidar
+# topic: 传感器发送信号的topic名
+# marking: 是否允许该传感器向地图中添加障碍
+# clearing: 是否允许该传感器从地图中清除障碍
+# expected_update_rate: 该传感器的topic发布频率
+# observation_sources: faceLaserScan leftLaserScan rightLaserScan vlpLidarScan
+# faceLaserScan: {data_type: LaserScan, topic: /faceLaserScan, marking: true, clearing: true, expected_update_rate: 3.3}
+# leftLaserScan: {data_type: LaserScan, topic: /leftLaserScan, marking: true, clearing: true, expected_update_rate: 3.3}
+# rightLaserScan: {data_type: LaserScan, topic: /rightLaserScan, marking: true, clearing: true, expected_update_rate: 3.3}
+observation_sources: vlpLidarScan
+vlpLidarScan: {data_type: LaserScan,   topic: /lidarLaserScan, marking: true, clearing: true, expected_update_rate: 10.0}

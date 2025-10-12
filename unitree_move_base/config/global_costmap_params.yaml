@@ -1,5 +1,7 @@
+# 添加激光雷达传感器之后可以单独修改该全局代价地图的参数文件
+
 global_costmap:
-   global_frame: odom         ##
+   global_frame: world         ##
    robot_base_frame: base
    update_frequency: 5.0      ##
    publish_frequency: 3.0

@@ -1,35 +1,35 @@
-recovery_behavior_enabled: true
-clearing_rotation_allowed: true
+recovery_behavior_enabled: true  ## 是否允许机器人使用脱困动作
+clearing_rotation_allowed: true  ## 是否允许机器人使用原地旋转的脱困动作
 
-controller_frequency: 10.0
+controller_frequency: 10.0  ## 发布控制命令的频率
 
 TrajectoryPlannerROS:
-   max_vel_x: 0.5
-   min_vel_x: 0.3
-   max_vel_y: 0.5
-   min_vel_y: 0.3
-   max_vel_theta: 1.2
-   min_vel_theta: -1.2
-   min_in_place_vel_theta: 0.8
-   escape_vel: -0.3
-   acc_lim_x: 0.5
-   acc_lim_y: 0.5
-   acc_lim_theta: 0.8
-   holonomic_robot: true
-   y_vels: [-0.2, -0.1, 0.1, 0.2]
+   max_vel_x: 0.5                                      ## 机器人x轴方向的最大速度
+   min_vel_x: 0.3                                      ## 机器人x轴方向的最小速度
+   max_vel_y: 0.5                                      ## 机器人y轴方向的最大速度
+   min_vel_y: 0.3                                      ## 机器人y轴方向的最小速度
+   max_vel_theta: 1.2                                  ## 机器人绕z轴旋转的最大角速度
+   min_vel_theta: -1.2                                 ## 机器人绕z轴旋转的最小角速度
+   min_in_place_vel_theta: 0.8                         ## 最小原地旋转速度 
+   escape_vel: -0.3                                    ## 机器人从障碍中脱离的速度，必须为负值
+   acc_lim_x: 0.5                                      ## 机器人x轴方向的最大线加速度
+   acc_lim_y: 0.5                                      ## 机器人y轴方向的最大线加速度
+   acc_lim_theta: 0.8                                  ## 机器人绕z轴旋转的最大角加速度
+   holonomic_robot: true                               ## 机器是否为完整约束，轮式小车是非完整约束，四足机器人是完整约束
+   y_vels: [-0.2, -0.1, 0.1, 0.2]                      ## 对完整约束的机器人，可以侧向平移，这里给出的是备选的侧移速度
 
-   yaw_goal_tolerance: 0.8 # about 45.8 degrees
-   xy_goal_tolerance: 0.4  # 40 cm
-   latch_xy_goal_tolerance: true    ##
+   yaw_goal_tolerance: 0.8 # about 45.8 degrees        ## 机器人允许的偏航角误差
+   xy_goal_tolerance: 0.4  # 40 cm                     ## 机器人允许的x, y坐标误差
+   latch_xy_goal_tolerance: true                       ## 允许机器人在无法达到目标点时原地旋转
 
    meter_scoring: true
 
    pdist_scale: 1.4
    gdist_scale: 2.8
 
-   heading_scoring: true            ##
-   heading_lookahead: 0.8
-   heading_scoring_timestep: 2.8    ##
+   heading_scoring: true                               ##
+   heading_lookahead: 0.8                              ##
+   heading_scoring_timestep: 2.8                       ##
    planner_patience: 5.0            
    oscillation_reset_dist: 0.05      
    publish_cost_grid_pc: false

@@ -4,6 +4,8 @@
         respawn="false" output="screen">
         <remap from="cloud_in" to="/cam1/point_cloud_face"/>
         <remap from="/scan" to="/faceLaserScan"/>
+        <!-- min_height max_height 限制点云的高度范围 -->
+        <!-- angle_min angle_max 限制生成的激光雷达数据的扇面角度，相机的边缘画质较差，如果边缘质量不好可以缩减扇面角度 -->
         <rosparam>
             target_frame: camera_face
             transform_tolerance: 0.01
@@ -80,5 +82,4 @@
         </rosparam>
         <!-- <rosparam file="$(find unitree_move_base)/config/pointCloud_to_laserScan_params.yaml" command="load" /> -->
     </node>
-
 </launch>
