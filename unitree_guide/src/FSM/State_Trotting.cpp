@@ -87,11 +87,12 @@ void State_Trotting::run() {
   calcTau();
   calcQQd();
 
-  if (checkStepOrNot()) {
-    _ctrlComp->setStartWave();
-  } else {
-    _ctrlComp->setAllStance();
-  }
+  // if (checkStepOrNot()) {
+  //   _ctrlComp->setStartWave();
+  // } else {
+  //   _ctrlComp->setAllStance();
+  // }
+  _ctrlComp->setStartWave();
 
   _lowCmd->setTau(_tau);
   _lowCmd->setQ(vec34ToVec12(_qGoal));
