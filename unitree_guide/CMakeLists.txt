@@ -10,7 +10,7 @@ set(GAZEBO ON)              # Use Gazebo or not, ON or OFF
 set(REAL_ROBOT OFF)          # Link real robot or not, ON or OFF
 
 
-set(DEBUG OFF)              # Use debug functions or not, ON or OFF
+set(DEBUG ON)              # Use debug functions or not, ON or OFF
 # set(DEBUG ON)              # Use debug functions or not, ON or OFF
 set(MOVE_BASE ON)               # Need move_base or not, ON or OFF
 
@@ -51,7 +51,7 @@ endif()
 
 if(DEBUG)
     add_definitions(-DCOMPILE_DEBUG)
-    find_package(Python2 COMPONENTS Interpreter Development NumPy)
+    find_package(Python COMPONENTS Interpreter Development NumPy)
 endif()
 
 if(CATKIN_BUILD)
@@ -131,7 +131,7 @@ if(CATKIN_BUILD)
 endif()
 if(DEBUG)
     target_include_directories(junior_ctrl PRIVATE ${Python2_INCLUDE_DIRS} ${Python2_NumPy_INCLUDE_DIRS})
-    target_link_libraries(junior_ctrl Python2::Python Python2::NumPy)
+    target_link_libraries(junior_ctrl Python::Python Python::NumPy)
 endif()
 if(REAL_ROBOT)
     if(${ROBOT_TYPE} STREQUAL "A1")

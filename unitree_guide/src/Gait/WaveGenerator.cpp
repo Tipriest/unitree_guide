@@ -5,7 +5,12 @@
 #include <iostream>
 #include <math.h>
 #include <sys/time.h>
-
+/**
+ * @brief Construct a new Wave Generator:: Wave Generator object
+ * @param[in] period        步态周期P
+ * @param[in] stancePhaseRatioMy 触地系数r
+ * @param[in] bias          四条腿偏移时间b与步态周期P的比值
+ */
 WaveGenerator::WaveGenerator(double period, double stancePhaseRatio, Vec4 bias)
     : _period(period), _stRatio(stancePhaseRatio), _bias(bias) {
 
@@ -32,6 +37,16 @@ WaveGenerator::WaveGenerator(double period, double stancePhaseRatio, Vec4 bias)
 
 WaveGenerator::~WaveGenerator() {}
 
+/**
+ * @brief 计算当前时刻四个足端的相位phaseResult和接触状态contactResult
+ * @param[out] phaseResult
+ * @param[out] contactResult 1代表触地面，0代表腾空
+ * @param[in] status 机器人的步态状态:
+ *                      STANCE_ALL: 四条腿始终触地
+ *                      SWING_ALL:  四条腿全部腾空
+ *                      WAVE_ALL:   四条腿交替触地, 腾空
+ *
+ */
 void WaveGenerator::calcContactPhase(Vec4 &phaseResult, VecInt4 &contactResult,
                                      WaveStatus status) {
 
@@ -70,12 +85,32 @@ void WaveGenerator::calcContactPhase(Vec4 &phaseResult, VecInt4 &contactResult,
   contactResult = _contact;
 }
 
+/**
+ * @brief 返回足端的触地时长T_stance
+ * @return float
+ */
 float WaveGenerator::getTstance() { return _period * _stRatio; }
 
+/**
+ * @brief 返回足端的腾空时长T_swing
+ * @return float
+ */
 float WaveGenerator::getTswing() { return _period * (1 - _stRatio); }
 
+/**
+ * @brief 返回步态周期P
+ * @return float
+ */
 float WaveGenerator::getT() { return _period; }
 
+/**
+ * @brief 计算按照从 WaveGenerator类
+ * 初始化到现在的时间，按照一开始初始化好的步态系数，应该
+ * 是接触态还是摆动态，是否理论上应该是触地的，理论相位是多少
+ * @param[in] phase         理论当前相位
+ * @param[in] contact       理论当前接触状态
+ * @param[in] status        机器人处于完全腾空，完全支撑还是一半一半
+ */
 void WaveGenerator::calcWave(Vec4 &phase, VecInt4 &contact, WaveStatus status) {
   if (status == WaveStatus::WAVE_ALL) {
     _passT = (double)(getSystemTime() - _startT) * 1e-6;
