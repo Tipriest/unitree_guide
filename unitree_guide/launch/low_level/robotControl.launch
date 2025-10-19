@@ -11,7 +11,7 @@
 
     <!-- 加载控制参数/控制插件 -->
     <!-- Load joint controller configurations from YAML file to parameter server -->
-    <rosparam file="/home/tipriest/Documents/legged_localization_benchmark/src/unitree_ros/robots/go1l2_description/config/robot_control.yaml" command="load"/>
+    <rosparam file="/home/tipriest/Documents/legged_localization_benchmark/src/unitree_ros/robots/$(arg rname)_description/config/robot_control.yaml" command="load"/>
 
     <!-- 加载控制器 -->
     <!-- load the controllers -->
