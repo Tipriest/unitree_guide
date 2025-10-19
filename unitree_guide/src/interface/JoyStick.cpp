@@ -39,6 +39,12 @@ void JoyStick::subJoystickMsgsCallback(const sensor_msgs::Joy::ConstPtr &msg) {
     userCmd = UserCommand::L2_X; // freestand
   } else if (1 == msg->buttons[7]) {
     userCmd = UserCommand::L2_B; // passive
+  } else if (1 == msg->buttons[6]) {
+    userCmd = UserCommand::L1_A; // swing_test
+  } else if (1 == msg->buttons[4]) {
+    userCmd = UserCommand::L1_X; // balance_test
+  } else if (1 == msg->buttons[5]) {
+    userCmd = UserCommand::L1_Y; // step_test
   }
   userValue.lx = clamp(msg->axes[0] * 1.0 / 32767, -1.0, 1.0);
   userValue.ly = clamp(msg->axes[1] * 1.0 / 32767, -1.0, 1.0);
