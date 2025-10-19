@@ -1,11 +1,11 @@
 <!-- 仿真环境构建 机器人模型加载 -->
 <launch>
-    <arg name="wname" default="willowgarage"/>
-    <arg name="rname" default="go1l2"/>
+    <arg name="wname" default="earth"/>
+    <arg name="rname" default="el_mini"/>
     <arg name="robot_path" value="(find $(arg rname)_description)"/>
     <arg name="dollar" value="$"/>
     <!-- Debug mode will hung up the robot, use "true" or "false" to switch it. -->
-    <arg name="user_debug" default="false"/>
+    <arg name="user_debug" default="true"/>
     <arg name="rviz" default="true"/>
     <arg name="rosbag" default="false"/>
     <arg name="slam_method" value = "point_lio" doc = "fast_lio point_lio"/>
