@@ -9,6 +9,17 @@
 #include <iostream>
 #include <unistd.h>
 
+/*
+               head
+  (leg3)LF ------------- RF(leg0)
+           |           |
+           |     x     |
+  (leg4)LM |  y__|     | RM(leg1)
+           |           |
+           |           |
+  (leg5)LB ------------- RB(leg2)
+*/
+
 void RosShutDown(int sig) {
   ROS_INFO("ROS interface shutting down!");
   ros::shutdown();
