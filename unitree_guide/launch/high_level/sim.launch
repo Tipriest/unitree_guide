@@ -1,7 +1,7 @@
 <!-- 仿真环境构建 机器人模型加载 -->
 <launch>
     <arg name="wname" default="earth"/>
-    <arg name="rname" default="el_mini"/>
+    <arg name="rname" default="el_201"/>
     <arg name="robot_path" value="(find $(arg rname)_description)"/>
     <arg name="dollar" value="$"/>
     <!-- Debug mode will hung up the robot, use "true" or "false" to switch it. -->

@@ -1,5 +1,5 @@
 <launch>
-    <arg name="rname" default="go1l2"/>
+    <arg name="rname" default="el_201"/>
     <arg name="robot_path" default="(find $(arg rname)_description)"/>
     <arg name="dollar" default="$"/>
     <arg name="user_debug" default="false"/>
@@ -7,16 +7,21 @@
 
     <!-- 加载urdf模型 -->
     <!-- Load the URDF into the ROS Parameter Server -->
-    <group if="$(eval arg('rname') != 'el_mini')">
+    <group if="$(eval arg('rname') != 'el_201')">
         <param name="robot_description" command="$(find xacro)/xacro --inorder '$(arg dollar)$(arg robot_path)/xacro/robot.xacro' DEBUG:=$(arg user_debug)"/>
     </group>
-    <group if="$(eval arg('rname') == 'el_mini')">
-        <param name="robot_description" command="cat $(find el_mini_description)/urdf/sw2urdf.urdf"/>
+    <group if="$(eval arg('rname') == 'el_201')">
+        <param name="robot_description" command="cat $(find el_201_description)/urdf/$(arg rname).urdf"/>
     </group>
     <!-- 加载控制参数/控制插件 -->
     <!-- Load joint controller configurations from YAML file to parameter server -->
-    <rosparam file="/home/tipriest/Documents/legged_localization_benchmark/src/unitree_ros/robots/$(arg rname)_description/config/robot_control.yaml" command="load"/>
-
+    <group if="$(eval arg('rname') != 'el_201')">
+        <rosparam file="/home/tipriest/Documents/legged_localization_benchmark/src/unitree_ros/robots/$(arg rname)_description/config/robot_control.yaml" command="load"/>
+    </group>
+    <!-- <group if="$(eval arg('rname') == 'el_201')">
+        <rosparam file="/home/tipriest/Documents/legged_localization_benchmark/src/unitree_ros/robots/hexapod_description/el_201_description/config/robot_control.yaml" command="load"/>
+    </group> -->
+    <rosparam file="/home/tipriest/Documents/legged_localization_benchmark/src/unitree_ros/robots/hexapod_description/el_201_description/config/robot_control.yaml" command="load"/>
     <!-- 加载控制器 -->
     <!-- load the controllers -->
     <group if="$(eval arg('rname') == 'go1l2')">
@@ -26,7 +31,7 @@
             RL_hip_controller RL_thigh_controller RL_calf_controller
             RR_hip_controller RR_thigh_controller RR_calf_controller "/>
     </group>
-    <group if="$(eval arg('rname') == 'el_mini')">
+    <group if="$(eval arg('rname') == 'el_201')">
         <node pkg="controller_manager" type="spawner" name="controller_spawner" respawn="false" output="screen" ns="/$(arg rname)_gazebo" args="joint_state_controller
             RF_HAA_controller RF_HFE_controller RF_KFE_controller
             RM_HAA_controller RM_HFE_controller RM_KFE_controller

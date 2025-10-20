@@ -1,6 +1,6 @@
 <launch>
     <!-- 加载gazebo仿真环境 -->
-    <arg name="wname" default="willowgarage"/>
+    <arg name="wname" default="high_box"/>
     <arg name="debug" default="false"/>
     <arg name="gui" default="true"/>
     <arg name="paused" default="true"/>

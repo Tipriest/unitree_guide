@@ -1,5 +1,5 @@
 <launch>
-    <arg name="rname" default="go1l2"/>
+    <arg name="rname" default="el_201"/>
     <arg name="robot_path" default="(find $(arg rname)_description)"/>
     <arg name="dollar" default="$"/>
 
@@ -7,15 +7,15 @@
     <arg name="user_debug" default="false"/>
 
     <!-- Load the URDF into the ROS Parameter Server -->
-    <group if="$(eval arg('rname') != 'el_mini')">
+    <group if="$(eval arg('rname') != 'el_201')">
         <param name="robot_description" command="$(find xacro)/xacro --inorder '$(arg dollar)$(arg robot_path)/xacro/robot.xacro' DEBUG:=$(arg user_debug)"/>
     </group>
-    <group if="$(eval arg('rname') == 'el_mini')">
-        <param name="robot_description" command="cat $(find el_mini_description)/urdf/sw2urdf.urdf"/>
+    <group if="$(eval arg('rname') == 'el_201')">
+        <param name="robot_description" command="cat $(find el_201_description)/urdf/$(arg rname).urdf"/>
     </group>
 
     <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
     <!-- Set trunk and joint positions at startup -->
     <node pkg="gazebo_ros" type="spawn_model" name="urdf_spawner" respawn="false" output="screen"
-          args="-urdf -z 0.6 -model $(arg rname)_gazebo -param robot_description -unpause"/>
+          args="-urdf -z 0.51 -model $(arg rname)_gazebo -param robot_description -unpause"/>
 </launch>
