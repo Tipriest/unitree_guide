@@ -21,6 +21,10 @@ HexapodLeg::HexapodLeg(int legID, float abadLinkLength, float hipLinkLength,
     std::cout << "Leg ID incorrect!" << std::endl;
     exit(-1);
   }
+
+  // Initialize Pinocchio model and data for the leg
+  pinocchio::urdf::buildModel("path_to_leg_urdf.urdf", model_);
+  data_ = pinocchio::Data(model_);
 }
 
 // 正向运动学
@@ -30,28 +34,9 @@ HexapodLeg::HexapodLeg(int legID, float abadLinkLength, float hipLinkLength,
  * @return Vec3   足端在髋关节坐标系下的位置向量
  */
 Vec3 HexapodLeg::calcPEe2H(Vec3 q) {
-  float l1 = _sideSign * _abadLinkLength;
-  float l2 = -_hipLinkLength;
-  float l3 = -_kneeLinkLength;
-
-  float s1 = std::sin(q(0));
-  float s2 = std::sin(q(1));
-  float s3 = std::sin(q(2));
-
-  float c1 = std::cos(q(0));
-  float c2 = std::cos(q(1));
-  float c3 = std::cos(q(2));
-
-  float c23 = c2 * c3 - s2 * s3;
-  float s23 = s2 * c3 + c2 * s3;
-
-  Vec3 pEe2H;
-
-  pEe2H(0) = l3 * s23 + l2 * s2;
-  pEe2H(1) = -l3 * s1 * c23 + l1 * c1 - l2 * c2 * s1;
-  pEe2H(2) = l3 * c1 * c23 + l1 * s1 + l2 * c1 * c2;
-
-  return pEe2H;
+  pinocchio::forwardKinematics(model_, data_, q);
+  pinocchio::updateFramePlacements(model_, data_);
+  return data_.oMf[model_.getFrameId("FOOT_LINK")].translation();
 }
 
 // 正向运动学
@@ -69,7 +54,13 @@ Vec3 HexapodLeg::calcPEe2B(Vec3 q) { return _pHip2B + calcPEe2H(q); }
  * @param[in] qd  三个关节的角速度qd
  * @return Vec3   足端的速度向量
  */
-Vec3 HexapodLeg::calcVEe(Vec3 q, Vec3 qd) { return calcJaco(q) * qd; }
+Vec3 HexapodLeg::calcVEe(Vec3 q, Vec3 qd) {
+  Eigen::MatrixXd jacobian(6, model_.nv);
+  pinocchio::computeFrameJacobian(model_, data_, q,
+                                  model_.getFrameId("FOOT_LINK"),
+                                  pinocchio::LOCAL_WORLD_ALIGNED, jacobian);
+  return jacobian.topRows<3>() * qd;
+}
 
 // 逆向运动学
 /**
@@ -80,93 +71,49 @@ Vec3 HexapodLeg::calcVEe(Vec3 q, Vec3 qd) { return calcJaco(q) * qd; }
  * @return Vec3     计算出的三个关节的角度
  */
 Vec3 HexapodLeg::calcQ(Vec3 pEe, FrameType frame) {
-  Vec3 pEe2H;
-  if (frame == FrameType::HIP)
-    pEe2H = pEe;
-  else if (frame == FrameType::BODY)
-    pEe2H = pEe - _pHip2B;
-  else {
-    std::cout
-        << "[ERROR] The frame of HexapodLeg::calcQ can only be HIP or BODY!"
-        << std::endl;
-    exit(-1);
-  }
-
-  float q1, q2, q3;
-  Vec3 qResult;
-  float px, py, pz;
-  float b2y, b3z, b4z, a, b, c;
-
-  px = pEe2H(0);
-  py = pEe2H(1);
-  pz = pEe2H(2);
-
-  b2y = _abadLinkLength * _sideSign;
-  b3z = -_hipLinkLength;
-  b4z = -_kneeLinkLength;
-  a = _abadLinkLength;
-  c = sqrt(pow(px, 2) + pow(py, 2) + pow(pz, 2)); // whole length
-  b = sqrt(pow(c, 2) - pow(a, 2)); // distance between shoulder and footpoint
-
-  q1 = q1_ik(py, pz, b2y);
-  q3 = q3_ik(b3z, b4z, b);
-  q2 = q2_ik(q1, q3, px, py, pz, b3z, b4z);
-
-  qResult(0) = q1;
-  qResult(1) = q2;
-  qResult(2) = q3;
-
-  return qResult;
+  // Use Pinocchio's inverse kinematics solver
+  pinocchio::SE3 target_pose(pinocchio::SE3::Identity());
+  target_pose.translation() = pEe;
+  Eigen::VectorXd q = Eigen::VectorXd::Zero(model_.nq);
+  pinocchio::inverseKinematics(model_, data_, model_.getFrameId("FOOT_LINK"),
+                               target_pose, q);
+  return q.head<3>();
 }
 
 // 逆向运动学导数
 // 根据关节角度和足端速度计算关节角速度
 Vec3 HexapodLeg::calcQd(Vec3 q, Vec3 vEe) {
-  return calcJaco(q).inverse() * vEe;
+  Eigen::MatrixXd jacobian(6, model_.nv);
+  pinocchio::computeFrameJacobian(model_, data_, q,
+                                  model_.getFrameId("FOOT_LINK"),
+                                  pinocchio::LOCAL_WORLD_ALIGNED, jacobian);
+  return jacobian.topRows<3>().inverse() * vEe;
 }
 
 // 逆向运动学导数
 // 根据足端位置和速度计算关节角速度
 Vec3 HexapodLeg::calcQd(Vec3 pEe, Vec3 vEe, FrameType frame) {
   Vec3 q = calcQ(pEe, frame);
-  return calcJaco(q).inverse() * vEe;
+  return calcQd(q, vEe);
 }
 
 // 逆向动力学
 // 根据关节角度和足端受力计算关节力矩
 Vec3 HexapodLeg::calcTau(Vec3 q, Vec3 force) {
-  return calcJaco(q).transpose() * force;
+  Eigen::MatrixXd jacobian(6, model_.nv);
+  pinocchio::computeFrameJacobian(model_, data_, q,
+                                  model_.getFrameId("FOOT_LINK"),
+                                  pinocchio::LOCAL_WORLD_ALIGNED, jacobian);
+  return jacobian.topRows<3>().transpose() * force;
 }
 
 // 计算雅可比矩阵
 Mat3 HexapodLeg::calcJaco(Vec3 q) {
-  Mat3 jaco;
-
-  float l1 = _abadLinkLength * _sideSign;
-  float l2 = -_hipLinkLength;
-  float l3 = -_kneeLinkLength;
-
-  float s1 = std::sin(q(0));
-  float s2 = std::sin(q(1));
-  float s3 = std::sin(q(2));
-
-  float c1 = std::cos(q(0));
-  float c2 = std::cos(q(1));
-  float c3 = std::cos(q(2));
-
-  float c23 = c2 * c3 - s2 * s3;
-  float s23 = s2 * c3 + c2 * s3;
-  jaco(0, 0) = 0;
-  jaco(1, 0) = -l3 * c1 * c23 - l2 * c1 * c2 - l1 * s1;
-  jaco(2, 0) = -l3 * s1 * c23 - l2 * c2 * s1 + l1 * c1;
-  jaco(0, 1) = l3 * c23 + l2 * c2;
-  jaco(1, 1) = l3 * s1 * s23 + l2 * s1 * s2;
-  jaco(2, 1) = -l3 * c1 * s23 - l2 * c1 * s2;
-  jaco(0, 2) = l3 * c23;
-  jaco(1, 2) = l3 * s1 * s23;
-  jaco(2, 2) = -l3 * c1 * s23;
-
-  return jaco;
+  Eigen::MatrixXd jacobian(6, model_.nv);
+  pinocchio::computeFrameJacobian(model_, data_, q,
+                                  model_.getFrameId("FOOT_LINK"),
+                                  pinocchio::LOCAL_WORLD_ALIGNED, jacobian);
+  return jacobian.topRows<3>();
 }
 
 // 逆运动学辅助函数：计算q1

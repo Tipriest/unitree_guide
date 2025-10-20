@@ -6,6 +6,10 @@
 
 #include "common/enumClass.h"
 #include "common/mathTypes.h"
+#include <pinocchio/algorithm/jacobian.hpp>
+#include <pinocchio/algorithm/kinematics.hpp>
+#include <pinocchio/multibody/data.hpp>
+#include <pinocchio/multibody/model.hpp>
 
 class HexapodLeg {
 public:
@@ -45,6 +49,8 @@ protected:
   const float _hipLinkLength;  // 大腿连杆长度
   const float _kneeLinkLength; // 小腿连杆长度
   const Vec3 _pHip2B; // 髋关节（基座）坐标系到机身坐标系的平移向量
+  pinocchio::Model model_; // Pinocchio model for the leg
+  pinocchio::Data data_;   // Pinocchio data for the leg
 };
 
 // Elmini机器人的腿部类，继承自HexapodLeg

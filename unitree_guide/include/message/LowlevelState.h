@@ -116,30 +116,15 @@ struct LowlevelStateHexapod {
   MotorState motorState[18];
   UserCommand userCmd;
   UserValue userValue;
-  Vec18 getQ2() {
+  Vec18 getQ() {
     Vec18 q;
-    q(0) = motorState[0].q;
-    q(1) = motorState[1].q;
-    q(2) = motorState[2].q;
-    q(3) = motorState[3].q;
-    q(4) = motorState[4].q;
-    q(5) = motorState[5].q;
-    q(6) = motorState[6].q;
-    q(7) = motorState[7].q;
-    q(8) = motorState[8].q;
-    q(9) = motorState[9].q;
-    q(10) = motorState[10].q;
-    q(11) = motorState[11].q;
-    q(12) = motorState[12].q;
-    q(13) = motorState[13].q;
-    q(14) = motorState[14].q;
-    q(15) = motorState[15].q;
-    q(16) = motorState[16].q;
-    q(17) = motorState[17].q;
+    for(int i = 0; i < 18; i++){
+      q(i) = motorState[i].q;
+    }
 
     return q;
   }
-  Vec18 getQd2() {
+  Vec18 getQd() {
     Vec18 qd;
     for (int i = 0; i < 18; ++i) {
       qd(i) = motorState[i].dq;

@@ -18,10 +18,10 @@ class IOROS : public IOInterface {
 public:
   IOROS();
   ~IOROS();
-  void sendRecv(const LowlevelCmd *cmd, LowlevelStateHexapod *state);
+  void sendRecv(const LowlevelCmdHexapod *cmd, LowlevelStateHexapod *state);
 
 private:
-  void sendCmd(const LowlevelCmd *cmd);
+  void sendCmd(const LowlevelCmdHexapod *cmd);
   void recvState(LowlevelStateHexapod *state);
   ros::NodeHandle _nm;
   ros::Subscriber _servo_sub[18], _imu_sub;
