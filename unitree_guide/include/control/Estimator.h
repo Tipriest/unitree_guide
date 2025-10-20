@@ -27,9 +27,9 @@
 
 class Estimator {
 public:
-  Estimator(QuadrupedRobot *robotModel, LowlevelState *lowState,
+  Estimator(QuadrupedRobot *robotModel, LowlevelStateHexapod *lowState,
             VecInt4 *contact, Vec4 *phase, double dt);
-  Estimator(QuadrupedRobot *robotModel, LowlevelState *lowState,
+  Estimator(QuadrupedRobot *robotModel, LowlevelStateHexapod *lowState,
             VecInt4 *contact, Vec4 *phase, double dt, Vec18 Qdig,
             std::string testName);
   ~Estimator();
@@ -87,7 +87,7 @@ private:
   Vec3 _g;
   Vec34 _feetPosGlobalKine, _feetVelGlobalKine;
 
-  LowlevelState *_lowState;
+  LowlevelStateHexapod *_lowState;
   QuadrupedRobot *_robModel;
   Vec4 *_phase;
   VecInt4 *_contact;

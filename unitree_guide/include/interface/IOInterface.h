@@ -13,7 +13,7 @@ class IOInterface{
 public:
 IOInterface(){}
 ~IOInterface(){delete cmdPanel;}
-virtual void sendRecv(const LowlevelCmd *cmd, LowlevelState *state) = 0;
+virtual void sendRecv(const LowlevelCmd *cmd, LowlevelStateHexapod *state) = 0;
 void zeroCmdPanel(){cmdPanel->setZero();}
 void setPassive(){cmdPanel->setPassive();}
 

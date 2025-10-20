@@ -57,6 +57,10 @@ using Mat3 = typename Eigen::Matrix<double, 3, 3>;
 // 3x4 Matrix, each column is a 3x1 vector
 using Vec34 = typename Eigen::Matrix<double, 3, 4>;
 
+
+// 3x6 Matrix, each column is a 3x1 vector
+using Vec36 = typename Eigen::Matrix<double, 3, 6>;
+
 // 6x6 Matrix
 using Mat6 = typename Eigen::Matrix<double, 6, 6>;
 
