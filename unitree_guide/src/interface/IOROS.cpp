@@ -18,6 +18,8 @@ IOROS::IOROS() : IOInterface() {
   std::cout << "The control interface for ROS Gazebo simulation" << std::endl;
   ros::param::get("/robot_name", _robot_name);
   std::cout << "robot_name: " << _robot_name << std::endl;
+  ros::param::get("/input_method", _input_method);
+  std::cout << "input_method: " << _input_method << std::endl;
 
   // start subscriber
   initRecv();
@@ -29,8 +31,15 @@ IOROS::IOROS() : IOInterface() {
 
   signal(SIGINT, RosShutDown);
 
-  // cmdPanel = new KeyBoard();
-  cmdPanel = new JoyStick(_nm);
+  if ("keyboard" == _input_method) {
+    cmdPanel = new KeyBoard();
+  } else if ("joystick" == _input_method) {
+    cmdPanel = new JoyStick(_nm);
+  } else {
+    std::cout << "input method not set, assume to be keyboard, continue..."
+              << std::endl;
+    cmdPanel = new KeyBoard();
+  }
 }
 
 IOROS::~IOROS() {

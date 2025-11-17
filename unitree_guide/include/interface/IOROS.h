@@ -29,6 +29,8 @@ private:
   unitree_legged_msgs::LowCmd _lowCmd;
   unitree_legged_msgs::LowState _lowState;
   std::string _robot_name;
+  // _input_method用于定义控制器的方式，是keyboard键盘还是joystick手柄
+  std::string _input_method;
 
   // repeated functions for multi-thread
   void initRecv();

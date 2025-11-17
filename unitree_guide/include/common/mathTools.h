@@ -43,6 +43,19 @@ inline T0 killZeroOffset(T0 a, const T1 limit) {
   return a;
 }
 
+/**
+ * @brief 反归一化，将数据从归一化后的范围转换回原始的数据范围
+ * @tparam T0 
+ * @tparam T1 
+ * @tparam T2 
+ * @param[in] value         需要归一化的值
+ * @param[in] min           原始数据下限
+ * @param[in] max           原始数据上限
+ * @param[in] minLim        归一化后的下限
+ * @param[in] maxLim        归一化后的上限
+ * @return T1 
+ * @author Tipriest (a1503741059@163.com)
+ */
 template <typename T0, typename T1, typename T2>
 inline T1 invNormalize(const T0 value, const T1 min, const T2 max,
                        const double minLim = -1, const double maxLim = 1) {

@@ -1,0 +1,7 @@
+<launch>
+    <arg name="input_method" default="keyboard" doc ="keyboard, joystick"/>
+    <param name="input_method" value="$(arg input_method)"/>
+    <group if="$(eval arg('input_method') == 'joystick')">
+        <include file="$(find joystick_node)/launch/joystick_node.launch"/>
+    </group>
+</launch>

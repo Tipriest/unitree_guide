@@ -88,6 +88,9 @@ void KeyBoard::changeValue() {
   default:
     break;
   }
+  std::cout << "lx: " << userValue.lx << "    ly: " << userValue.ly
+            << "    rx: " << userValue.rx << "    ry: " << userValue.ry
+            << std::endl;
 }
 
 void *KeyBoard::runKeyBoard(void *arg) {
