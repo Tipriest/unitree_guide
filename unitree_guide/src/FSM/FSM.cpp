@@ -2,9 +2,20 @@
  Copyright (c) 2020-2023, Unitree Robotics.Co.Ltd. All rights reserved.
 ***********************************************************************/
 #include "FSM/FSM.h"
+#include <chrono>
 #include <iostream>
 #include <ros/ros.h>
 #include <ros/time.h>
+
+namespace {
+inline double calcCurrentHz(std::chrono::steady_clock::time_point &last_tp) {
+  using clock = std::chrono::steady_clock;
+  const auto now = clock::now();
+  const double dt = std::chrono::duration<double>(now - last_tp).count();
+  last_tp = now;
+  return (dt > 1e-9) ? (1.0 / dt) : 0.0;
+}
+} // namespace
 
 FSM::FSM(CtrlComponents *ctrlComp) : _ctrlComp(ctrlComp) {
 
@@ -32,20 +43,17 @@ void FSM::initialize() {
 }
 
 void FSM::run() {
+  using clock = std::chrono::steady_clock;
+  static auto last_tp = clock::now();
+  const double hz = calcCurrentHz(last_tp);
+  ROS_INFO_STREAM_THROTTLE(1.0, "[FSM] Actual Hz: " << hz);
+
   _startTime = getSystemTime();
   _ctrlComp->sendRecv();
   _ctrlComp->runWaveGen();
   _ctrlComp->estimator->run();
   if (!checkSafty()) {
     _ctrlComp->ioInter->setPassive();
-  }
-  if (0 == state_print_count++ % 500) {
-    // 获取当前ROS时间
-    ros::Time current_time = ros::Time::now();
-
-    // 打印为秒和纳秒
-    ROS_INFO("Current State is:  %s",
-             _currentState->_stateNameString.c_str());
   }
   if (_mode == FSMMode::NORMAL) {
     _currentState->run();

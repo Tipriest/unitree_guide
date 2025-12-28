@@ -64,7 +64,6 @@ private:
     FSMMode _mode;
     long long _startTime;
     int count;
-    int state_print_count = 0;
 };
 
 
