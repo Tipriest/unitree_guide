@@ -6,7 +6,9 @@
     <arg name="paused" default="true"/>
     <arg name="use_sim_time" default="true"/>
     <arg name="headless" default="false"/>
-    
+    <arg name="verbose" default="true"/>
+
+
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
         <arg name="world_name" value="$(find gazebo_worlds)/worlds/indoor_worlds/$(arg wname).world"/>
         <arg name="debug" value="$(arg debug)"/>
@@ -14,5 +16,6 @@
         <arg name="paused" value="$(arg paused)"/>
         <arg name="use_sim_time" value="$(arg use_sim_time)"/>
         <arg name="headless" value="$(arg headless)"/>
+        <arg name="verbose" value="$(arg verbose)"/>
     </include>
 </launch>

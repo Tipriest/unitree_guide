@@ -1,6 +1,5 @@
 <!-- 仿真环境构建 机器人模型加载 -->
 <launch>
-    <arg name="wname" default="willowgarage"/>
     <arg name="rname" default="go1l2"/>
     <arg name="robot_path" value="(find $(arg rname)_description)"/>
     <arg name="dollar" value="$"/>
@@ -9,18 +8,21 @@
     <arg name="rviz" default="true"/>
     <arg name="rosbag" default="false"/>
     <arg name="slam_method" value = "point_lio" doc = "fast_lio point_lio"/>
+    
 
-
-    <!-- 加载gazebo环境 -->
-    <include file="$(find unitree_guide)/launch/low_level/gazeboLoad.launch">
-        <arg name="wname" value="$(arg wname)"/>
-    </include>
-
-    <!-- 在gazebo中加载机器人模型(加载模型，urdf生成，加载位置) -->
-    <include file="$(find unitree_guide)/launch/low_level/robotLoad.launch">
+    <!-- 加载机器人控制参数，unitree ros controller插件 -->
+    <include file="$(find unitree_guide)/launch/low_level/robotControl.launch">
         <arg name="rname" value="$(arg rname)"/>
         <arg name="robot_path" value="$(arg robot_path)"/>
         <arg name="dollar" value="$(arg dollar)"/>
+        <arg name="user_debug" value="$(arg user_debug)"/>
     </include>
-    
+
+    <!-- tf坐标转换，rviz显示，rosbag录制 -->
+    <include file="$(find unitree_guide)/launch/low_level/chore.launch">
+        <arg name="rviz" value="$(arg rviz)"/>
+        <arg name="rosbag" value="$(arg rosbag)"/>
+        <arg name="slam_method" value="$(arg slam_method)"/>
+    </include>
+    <!-- <node pkg="unitree_gazebo" type="servo" name="servo" required="true" output="screen"/> -->
 </launch>
