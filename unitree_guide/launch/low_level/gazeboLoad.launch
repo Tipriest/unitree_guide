@@ -1,5 +1,6 @@
 <launch>
     <!-- 加载gazebo仿真环境 -->
+    <arg name="world_class" default="indoor_worlds"/>
     <arg name="wname" default="willowgarage"/>
     <arg name="debug" default="false"/>
     <arg name="gui" default="true"/>
@@ -10,7 +11,7 @@
 
 
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
-        <arg name="world_name" value="$(find gazebo_worlds)/worlds/indoor_worlds/$(arg wname).world"/>
+        <arg name="world_name" value="$(find gazebo_worlds)/worlds/$(arg world_class)/$(arg wname).world"/>
         <arg name="debug" value="$(arg debug)"/>
         <arg name="gui" value="$(arg gui)"/>
         <arg name="paused" value="$(arg paused)"/>

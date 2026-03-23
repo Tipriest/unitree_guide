@@ -1,6 +1,9 @@
 <!-- 仿真环境构建 机器人模型加载 -->
 <launch>
-    <arg name="wname" default="willowgarage"/>
+    <!-- <arg name="wname" default="willowgarage"/> -->
+    <arg name="world_class" default="outdoor_worlds"/>
+    <arg name="wname" default="outdoor_bigscale"/>
+    <!-- <arg name="wname" default="example_course"/> -->
     <arg name="rname" default="go1l2"/>
     <arg name="robot_path" value="(find $(arg rname)_description)"/>
     <arg name="dollar" value="$"/>
@@ -14,6 +17,7 @@
     <!-- 加载gazebo环境 -->
     <include file="$(find unitree_guide)/launch/low_level/gazeboLoad.launch">
         <arg name="wname" value="$(arg wname)"/>
+        <arg name="world_class" value="$(arg world_class)"/>
     </include>
 
     <!-- 在gazebo中加载机器人模型(加载模型，urdf生成，加载位置) -->
@@ -22,5 +26,5 @@
         <arg name="robot_path" value="$(arg robot_path)"/>
         <arg name="dollar" value="$(arg dollar)"/>
     </include>
-    
+
 </launch>
