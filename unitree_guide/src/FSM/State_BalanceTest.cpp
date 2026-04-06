@@ -5,7 +5,7 @@
 
 State_BalanceTest::State_BalanceTest(CtrlComponents *ctrlComp)
                   :FSMState(ctrlComp, FSMStateName::BALANCETEST, "balanceTest"),
-                  _est(ctrlComp->estimator), _robModel(ctrlComp->robotModel), 
+                  _est(ctrlComp->estimator), _robModel(ctrlComp->robotModel),
                   _balCtrl(ctrlComp->balCtrl), _contact(ctrlComp->contact){
 
     _xMax = 0.05;
@@ -61,15 +61,13 @@ void State_BalanceTest::exit(){
 }
 
 FSMStateName State_BalanceTest::checkChange(){
-    if(_lowState->userCmd == UserCommand::L2_B){
-        return FSMStateName::PASSIVE;
-    }
-    else if(_lowState->userCmd == UserCommand::L2_A){
-        return FSMStateName::FIXEDSTAND;
-    }
-    else{
-        return FSMStateName::BALANCETEST;
-    }
+  if (_lowState->userCmd == UserCommand::L2_A) {
+    return FSMStateName::PASSIVE;
+  } else if (_lowState->userCmd == UserCommand::L2_X) {
+    return FSMStateName::FIXEDSTAND;
+  } else {
+    return FSMStateName::BALANCETEST;
+  }
 }
 
 void State_BalanceTest::calcTau(){

@@ -56,9 +56,9 @@ void State_Trotting::exit() {
 }
 
 FSMStateName State_Trotting::checkChange() {
-  if (_lowState->userCmd == UserCommand::L2_B) {
+  if (_lowState->userCmd == UserCommand::L2_A) {
     return FSMStateName::PASSIVE;
-  } else if (_lowState->userCmd == UserCommand::L2_A) {
+  } else if (_lowState->userCmd == UserCommand::L2_X) {
     return FSMStateName::FIXEDSTAND;
   } else {
     return FSMStateName::TROTTING;

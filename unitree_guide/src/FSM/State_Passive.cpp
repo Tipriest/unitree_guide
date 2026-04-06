@@ -32,7 +32,7 @@ void State_Passive::enter(){
 }
 
 void State_Passive::run(){
-    
+
 }
 
 void State_Passive::exit(){
@@ -40,10 +40,9 @@ void State_Passive::exit(){
 }
 
 FSMStateName State_Passive::checkChange(){
-    if(_lowState->userCmd == UserCommand::L2_A){
-        return FSMStateName::FIXEDSTAND;
-    }
-    else{
-        return FSMStateName::PASSIVE;
-    }
+  if (_lowState->userCmd == UserCommand::L2_X) {
+    return FSMStateName::FIXEDSTAND;
+  } else {
+    return FSMStateName::PASSIVE;
+  }
 }

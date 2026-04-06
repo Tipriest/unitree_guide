@@ -27,9 +27,7 @@ FSM::FSM(CtrlComponents *ctrlComp) : _ctrlComp(ctrlComp) {
   _stateList.balanceTest = new State_BalanceTest(_ctrlComp);
   _stateList.swingTest = new State_SwingTest(_ctrlComp);
   _stateList.stepTest = new State_StepTest(_ctrlComp);
-#ifdef COMPILE_WITH_MOVE_BASE
   _stateList.moveBase = new State_move_base(_ctrlComp);
-#endif // COMPILE_WITH_MOVE_BASE
   initialize();
 }
 
@@ -101,11 +99,9 @@ FSMState *FSM::getNextState(FSMStateName stateName) {
   case FSMStateName::STEPTEST:
     return _stateList.stepTest;
     break;
-#ifdef COMPILE_WITH_MOVE_BASE
   case FSMStateName::MOVE_BASE:
     return _stateList.moveBase;
     break;
-#endif // COMPILE_WITH_MOVE_BASE
   default:
     return _stateList.invalid;
     break;

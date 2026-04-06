@@ -25,17 +25,15 @@ KeyBoard::~KeyBoard() {
 UserCommand KeyBoard::checkCmd() {
   switch (_c) {
   case '1': // passive
-    return UserCommand::L2_B;
-  case '2': // fixedstand
     return UserCommand::L2_A;
-  case '3': // freestand
+  case '2': // fixedstand
     return UserCommand::L2_X;
-  case '4': // trotting
+  case '3': // freestand
     return UserCommand::START;
-#ifdef COMPILE_WITH_MOVE_BASE
-  case '5': // move_base
+  case '4': // trotting
     return UserCommand::L2_Y;
-#endif // COMPILE_WITH_MOVE_BASE
+  case '5': // move_base
+    return UserCommand::L2_B;
   case '0':
     return UserCommand::L1_X;
   case '9':

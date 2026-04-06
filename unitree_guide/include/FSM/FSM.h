@@ -15,9 +15,7 @@
 #include "FSM/State_StepTest.h"
 #include "common/enumClass.h"
 #include "control/CtrlComponents.h"
-#ifdef COMPILE_WITH_MOVE_BASE
-    #include "FSM/State_move_base.h"
-#endif  // COMPILE_WITH_MOVE_BASE
+#include "FSM/State_move_base.h"
 
 struct FSMStateList{
     FSMState *invalid;
@@ -28,9 +26,7 @@ struct FSMStateList{
     State_BalanceTest *balanceTest;
     State_SwingTest *swingTest;
     State_StepTest *stepTest;
-#ifdef COMPILE_WITH_MOVE_BASE
     State_move_base *moveBase;
-#endif  // COMPILE_WITH_MOVE_BASE
 
     void deletePtr(){
         delete invalid;
@@ -41,9 +37,7 @@ struct FSMStateList{
         delete balanceTest;
         delete swingTest;
         delete stepTest;
-#ifdef COMPILE_WITH_MOVE_BASE
         delete moveBase;
-#endif  // COMPILE_WITH_MOVE_BASE
     }
 };
 

@@ -50,11 +50,11 @@ void State_FreeStand::run() {
 void State_FreeStand::exit() { _ctrlComp->ioInter->zeroCmdPanel(); }
 
 FSMStateName State_FreeStand::checkChange() {
-  if (_lowState->userCmd == UserCommand::L2_A) {
+  if (_lowState->userCmd == UserCommand::L2_X) {
     return FSMStateName::FIXEDSTAND;
-  } else if (_lowState->userCmd == UserCommand::L2_B) {
+  } else if (_lowState->userCmd == UserCommand::L2_A) {
     return FSMStateName::PASSIVE;
-  } else if (_lowState->userCmd == UserCommand::START) {
+  } else if (_lowState->userCmd == UserCommand::L2_Y) {
     return FSMStateName::TROTTING;
   } else {
     return FSMStateName::FREESTAND;

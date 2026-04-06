@@ -1,7 +1,6 @@
 /**********************************************************************
  Copyright (c) 2020-2023, Unitree Robotics.Co.Ltd. All rights reserved.
 ***********************************************************************/
-#ifdef COMPILE_WITH_MOVE_BASE
 
 #ifndef STATE_MOVE_BASE_H
 #define STATE_MOVE_BASE_H
@@ -27,4 +26,3 @@ private:
 
 #endif  // STATE_MOVE_BASE_H
 
-#endif  // COMPILE_WITH_MOVE_BASE
